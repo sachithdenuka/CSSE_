@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start" (click)="goHome()">
+      <ion-icon name="arrow-back" large></ion-icon>
+    </ion-buttons>
+    <ion-title>Stocks</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="back">
+    <ion-grid *ngFor="let stocks of allStocks">
+      <ion-row justify-content-center>
+        <ion-card (click)="onClickItem(stocks)" [ngStyle]="{'border-color' :  stocks.isCritical? 'red': '#11C0FF'}">
+          <ion-item>
+            <ion-icon name="information-circle"[color]="compareCritical(stocks.itemQuantity, stocks.criticalLevel)? 'danger': 'primary'" slot="start"></ion-icon>
+            <ion-label>
+              {{stocks.itemType}}&nbsp;&nbsp;
+              <span>
+                <ion-badge color="danger" *ngIf="compareCritical(stocks.itemQuantity, stocks.criticalLevel)">CRITICAL</ion-badge>
+              </span>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

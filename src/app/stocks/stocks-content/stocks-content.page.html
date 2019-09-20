@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start" (click)="goHome()">
+      <ion-icon name="arrow-back" large></ion-icon>
+    </ion-buttons>
+    <ion-title>Stocks</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+      <ion-item>
+        <ion-icon name="information-circle" slot="start" [color]="stocks.isCritical? 'danger':'primary'"></ion-icon>
+        <ion-label *ngIf="stocks.isCritical">Details&nbsp;&nbsp;<ion-badge color="danger">CRITICAL</ion-badge></ion-label>
+        <ion-label *ngIf="!stocks.isCritical">Details&nbsp;&nbsp;<ion-badge color="primary">NOT CRITICAL</ion-badge></ion-label>
+        <ion-button fill="outline" slot="end" (click)="order()">Order</ion-button>
+      </ion-item>
+      <ion-card-content>
+        <p>1 {{stocks.itemMetric}} of {{stocks.itemType}} : {{stocks.itemPrice}}</p>
+        <h3><ion-badge color="primary">{{stocks.itemQuantity}} <small>{{stocks.itemMetric}}</small> Available.</ion-badge></h3>
+        <h3><ion-badge color="warning">CRITICAL LEVEL : {{stocks.criticalLevel}} <small>{{stocks.itemMetric}}</small></ion-badge></h3>
+        <ion-progress-bar [buffer]="calculateRemaining(stocks.itemQuantity, stocks.criticalLevel)" [color]="stocks.isCritical? 'danger': 'warning'" [value]="calculateRemaining(stocks.itemQuantity, stocks.criticalLevel)"></ion-progress-bar>
+      </ion-card-content>
+    </ion-card>
+        <form *ngIf="isOrder" [formGroup]="orderForm" (ngSubmit)="onOrder()">
+          <ion-list>
+
+            <ion-item>
+              <ion-label position="stacked">Supplier<span class="required">*</span></ion-label>
+              <ion-select name="supplier" formControlName="supplier" okText="Okay" cancelText="Dismiss">
+                <ion-select-option *ngFor="let supplier of suppliers" value="{{supplier.supplierId}}">{{supplier.supplierName}}</ion-select-option>
+              </ion-select>
+<!--              <div *ngIf="supplier.errors.required">-->
+<!--                supplier is required.-->
+<!--              </div>-->
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Item</ion-label>
+              <ion-input formControlName="item" type="text" disabled>
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Quantity<span class="required">*</span></ion-label>
+              <ion-input formControlName="quantity" type="number" #quantity required>
+              </ion-input>
+              <div *ngIf="quantity.errors?.required">
+                quantity is required.
+              </div>
+            </ion-item>
+
+
+            <ion-item>
+              <ion-label position="stacked">Description</ion-label>
+              <ion-input formControlName="description" type="text">
+              </ion-input>
+            </ion-item>
+
+          </ion-list>
+
+          <ion-row>
+            <ion-col>
+              <ion-button typ color="primary" shape="round" expand="block">Order</ion-button>
+            </ion-col>
+          </ion-row>
+
+        </form>
+</ion-content>

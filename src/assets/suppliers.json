@@ -1,0 +1,26 @@
+[
+  {
+    "supplierId": "SUP001",
+    "supplierName": "Edward's Hardware"
+  },
+  {
+    "supplierId": "SUP002",
+    "supplierName": "Stewart's Hardware"
+  },
+  {
+    "supplierId": "SUP003",
+    "supplierName": "Ramona's Hardware"
+  },
+  {
+    "supplierId": "SUP004",
+    "supplierName": "Albert's Hardware"
+  },
+  {
+    "supplierId": "SUP005",
+    "supplierName": "Edirisinghe's Hardware"
+  },
+  {
+    "supplierId": "SUP006",
+    "supplierName": "George's Hardware"
+  }
+]

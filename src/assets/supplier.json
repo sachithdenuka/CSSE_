@@ -1,0 +1,26 @@
+{
+  "supplierId":"SUP001",
+  "supplierName":"Edward's Hardware",
+  "items":[
+    {
+      "itemId":"item001",
+      "itemName":"bricks",
+      "price":"200.00"
+    },
+    {
+      "itemId":"item002",
+      "itemName":"bricks",
+      "price":"200.00"
+    },
+    {
+      "itemId":"item003",
+      "itemName":"bricks",
+      "price":"200.00"
+    },
+    {
+      "itemId":"item004",
+      "itemName":"bricks",
+      "price":"200.00"
+    }
+  ]
+}

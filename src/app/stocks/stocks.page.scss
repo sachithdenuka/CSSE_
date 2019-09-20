@@ -1,0 +1,21 @@
+.background-white{
+  background-color: white;
+  color: var(--dark-color);
+}
+
+ion-card{
+  width: 100%;
+  height: auto;
+  border: 3px solid;
+  border-radius: 9px;
+}
+
+ion-card p {
+  font-size: 15px;
+}
+
+.back{
+  height: fit-content;
+  background-color: var(--dark-color);
+}
+

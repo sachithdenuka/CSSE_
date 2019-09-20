@@ -1,0 +1,7 @@
+{
+  "name": "csse_site_manager",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

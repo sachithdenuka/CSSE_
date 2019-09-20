@@ -1,0 +1,15 @@
+/* menu styling */
+ion-menu{
+  ion-item,
+  ion-list, .list-md,
+  ion-content{
+    --background: var(--dark-color);
+    --ion-background-color: var(--dark-color);
+  }
+  ion-item{
+    color: var(--text-color);
+  }
+  ion-icon{
+    color: #ee0300;
+  }
+}
