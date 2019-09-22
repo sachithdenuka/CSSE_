@@ -1,26 +1,73 @@
 [
   {
     "supplierId": "SUP001",
-    "supplierName": "Edward's Hardware"
+    "supplierName": "Edward's Hardware",
+    "items": [
+      {
+        "itemId": 1,
+        "itemName": "cement",
+        "price": 200.00
+      },
+      {
+        "itemId": 2,
+        "itemName": "bricks",
+        "price": 200.00
+      }
+    ]
   },
   {
     "supplierId": "SUP002",
-    "supplierName": "Stewart's Hardware"
+    "supplierName": "Stewart's Hardware",
+    "items": [
+      {
+        "itemId": 1,
+        "itemName": "sand",
+        "price": 200.00
+      }
+    ]
   },
   {
     "supplierId": "SUP003",
-    "supplierName": "Ramona's Hardware"
+    "supplierName": "Ramona's Hardware",
+    "items": [
+      {
+        "itemId": 1,
+        "itemName": "Obsidian Rocks",
+        "price": 200.00
+      }
+    ]
   },
   {
     "supplierId": "SUP004",
-    "supplierName": "Albert's Hardware"
+    "supplierName": "Albert's Hardware",
+    "items": [
+      {
+        "itemId": 1,
+        "itemName": "Concrete Bricks",
+        "price": 200.00
+      }
+    ]
   },
   {
     "supplierId": "SUP005",
-    "supplierName": "Edirisinghe's Hardware"
+    "supplierName": "Edirisinghe's Hardware",
+    "items": [
+      {
+        "itemId": 1,
+        "itemName": "wood",
+        "price": 200.00
+      }
+    ]
   },
   {
     "supplierId": "SUP006",
-    "supplierName": "George's Hardware"
+    "supplierName": "George's Hardware",
+    "items": [
+      {
+        "itemId": 1,
+        "itemName": "net",
+        "price": 200.00
+      }
+    ]
   }
 ]

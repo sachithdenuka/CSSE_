@@ -11,6 +11,7 @@ export class ItemDto {
 }
 
 export class SuppliersDto {
-    private suplierId: string;
-    private suplierName: string;
+    private supplierId: string;
+    private supplierName: string;
+    private items: ItemDto[];
 }

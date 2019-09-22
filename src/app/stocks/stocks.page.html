@@ -8,21 +8,42 @@
 </ion-header>
 
 <ion-content>
-  <div class="back">
-    <ion-grid *ngFor="let stocks of allStocks">
-      <ion-row justify-content-center>
-        <ion-card (click)="onClickItem(stocks)" [ngStyle]="{'border-color' :  stocks.isCritical? 'red': '#11C0FF'}">
-          <ion-item>
-            <ion-icon name="information-circle"[color]="compareCritical(stocks.itemQuantity, stocks.criticalLevel)? 'danger': 'primary'" slot="start"></ion-icon>
-            <ion-label>
-              {{stocks.itemType}}&nbsp;&nbsp;
-              <span>
-                <ion-badge color="danger" *ngIf="compareCritical(stocks.itemQuantity, stocks.criticalLevel)">CRITICAL</ion-badge>
-              </span>
-            </ion-label>
-          </ion-item>
-        </ion-card>
+  <div [ngClass]="criticalLock? 'back100': 'back'">
+    <ion-grid style="background-color: var(--dark-color)">
+      <ion-row justify-content-between>
+        <ion-searchbar   [(ngModel)]="searchInput"
+                         (ionChange)="filterItems()"></ion-searchbar>
+        <ion-badge color="warning" *ngIf="!criticalLock" (click)="showOnlyCritical()">Only critical</ion-badge>
+        <ion-badge color="warning" *ngIf="criticalLock" (click)="showOnlyCritical()">All</ion-badge>
       </ion-row>
+      <div *ngFor="let stocks of allStocks">
+        <ion-row justify-content-center *ngIf="!criticalLock">
+          <ion-card (click)="onClickItem(stocks)" [ngStyle]="{'border-color' :  stocks.isCritical? 'red': '#11C0FF'}">
+            <ion-item>
+              <ion-icon name="information-circle"[color]="compareCritical(stocks.itemQuantity, stocks.criticalLevel)? 'danger': 'primary'" slot="start"></ion-icon>
+              <ion-label>
+                {{stocks.itemType}}&nbsp;&nbsp;
+                <span>
+                  <ion-badge color="danger" *ngIf="compareCritical(stocks.itemQuantity, stocks.criticalLevel)">CRITICAL</ion-badge>
+                </span>
+              </ion-label>
+            </ion-item>
+          </ion-card>
+        </ion-row>
+        <ion-row justify-content-center *ngIf="criticalLock">
+          <ion-card (click)="onClickItem(stocks)" [ngStyle]="{'border-color' :  stocks.isCritical? 'red': '#11C0FF'}" *ngIf="stocks.isCritical">
+            <ion-item>
+              <ion-icon name="information-circle"[color]="compareCritical(stocks.itemQuantity, stocks.criticalLevel)? 'danger': 'primary'" slot="start"></ion-icon>
+              <ion-label>
+                {{stocks.itemType}}&nbsp;&nbsp;
+                <span>
+                  <ion-badge color="danger" *ngIf="compareCritical(stocks.itemQuantity, stocks.criticalLevel)">CRITICAL</ion-badge>
+                </span>
+              </ion-label>
+            </ion-item>
+          </ion-card>
+        </ion-row>
+      </div>
     </ion-grid>
   </div>
 </ion-content>

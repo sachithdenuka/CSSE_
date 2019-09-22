@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {SuppliersDto} from '../stocks/DTO/supplierDto';
+import {StocksService} from '../stocks/stocks-service/stocks.service';
+import {ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-list',
@@ -7,13 +11,62 @@ import {Router} from '@angular/router';
   styleUrls: ['quick-order.page.scss']
 })
 export class QuickOrderPage implements OnInit {
-
-  constructor(private router: Router) { }
+  public orderForm: FormGroup;
+  suppliers: SuppliersDto[];
+  submitted = false;
+  constructor(
+      private router: Router,
+      private formBuilder: FormBuilder,
+      private stocksService: StocksService,
+      private toastController: ToastController,
+  ) { }
 
   ngOnInit() {
+    this.orderForm = new FormGroup({
+      supplier: new FormControl(this.suppliers, Validators.required),
+      item: new FormControl('', Validators.required),
+      quantity: new FormControl('', Validators.required)
+    });
+
+    this.stocksService.getSuppliersForItem('somthing').subscribe(data => {
+      this.suppliers = data;
+    });
   }
 
   goHome() {
     this.router.navigate(['home']);
+  }
+  onOrder() {
+    this.submitted = true;
+
+    if (this.orderForm.invalid) {
+      this.showEmptyFieldToaster('Please fill the required fields!');
+      return;
+    }
+    this.showEmptyFieldToaster('successful!');
+  }
+
+  async showEmptyFieldToaster(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      buttons: [
+        {
+          text: 'X',
+          role: 'cancel'
+        }
+      ]
+    });
+    await toast.present();
+  }
+
+  getSuppliers() {
+    if (this.orderForm.value.supplier) {
+      return this.suppliers.filter(data => {
+        return data.supplierId === this.orderForm.value.supplier;
+      });
+    } else {
+      return this.suppliers;
+    }
   }
 }

@@ -2,7 +2,7 @@ export class StocksDto{
     private _id: string;
     private itemId: number;
     private itemPrice: number;
-    private itemType: string;
+    public itemType: string;
     private itemQuantity: number;
     private itemMetric: string;
     private supplierId: string;

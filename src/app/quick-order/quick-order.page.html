@@ -6,3 +6,60 @@
     <ion-title>Quick Order</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <form [formGroup]="orderForm" (ngSubmit)="onOrder()">
+
+    <!--supplier-->
+    <ion-item>
+      <ion-label>Supplier</ion-label>
+      <ion-select name="supplier" formControlName="supplier">
+        <ion-select-option *ngFor="let supplier of suppliers" value="{{supplier.supplierId}}">{{supplier.supplierName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div text-center *ngIf="orderForm.controls.supplier.invalid && (submitted || orderForm.controls.supplier.dirty || orderForm.controls.supplier.touched)">
+      <ion-label color="danger">Please select supplier</ion-label>
+    </div>
+
+    <!--item-->
+    <ion-item>
+      <ion-label>Item</ion-label>
+      <ion-select name="item" formControlName="item">
+        <div *ngFor="let supplier of getSuppliers()">
+          <ion-select-option *ngFor="let item of supplier.items" value="{{item.itemId}}">{{item.itemName}}</ion-select-option>
+        </div>
+      </ion-select>
+    </ion-item>
+    <div text-center *ngIf="orderForm.controls.supplier.invalid && (submitted || orderForm.controls.supplier.dirty || orderForm.controls.supplier.touched)">
+      <ion-label color="danger">Please select supplier</ion-label>
+    </div>
+
+    <!--quantity-->
+    <ion-item>
+      <ion-label>Quantity</ion-label>
+      <ion-input class="form-control" type="number" formControlName="quantity"  placeholder="Enter Quantity" required></ion-input>
+    </ion-item>
+    <div text-center *ngIf="orderForm.controls.quantity.invalid && (submitted || orderForm.controls.quantity.dirty || orderForm.controls.quantity.touched)">
+      <ion-label color="danger">Please Enter Quantity</ion-label>
+    </div>
+
+    <ion-button type="submit">Confirm</ion-button>
+  </form>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-title>Suppliers</ion-title>
+      </ion-row>
+      <div *ngFor="let supplier of getSuppliers()">
+        <ion-row>
+          <ion-col style="border: 2px solid black; border-radius: 9px; margin: 2px;" text-center>
+            <h5>{{supplier.supplierName}}</h5>
+              <ion-col *ngFor="let item of supplier.items">
+                <p>{{item.itemName}}&nbsp;&nbsp;&nbsp;<span>{{item.price}}.00</span></p>
+              </ion-col>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-grid>
+
+  </ion-card>
+</ion-content>

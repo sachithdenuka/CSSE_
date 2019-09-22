@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SuppliersDto} from '../DTO/supplierDto';
 import {StocksService} from '../stocks-service/stocks.service';
+import {LoadingController, ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-stocks-content',
@@ -14,44 +15,32 @@ export class StocksContentPage implements OnInit {
   isOrder = false;
   public orderForm: FormGroup;
   suppliers: SuppliersDto[];
+  submitted = false;
 
   constructor(
       private router: Router,
       private route: ActivatedRoute,
+      private toastController: ToastController,
+      public loadingCtrl: LoadingController,
       private formBuilder: FormBuilder,
       private stocksService: StocksService) { }
 
-    get supplier() {
-      return this.orderForm.get('supplier');
-    }
-    get item() {
-      return this.orderForm.get('item');
-    }
-    get quantity() {
-      return this.orderForm.get('quantity');
-    }
-    get description() {
-      return this.orderForm.get('description  ');
-    }
-
   ngOnInit() {
     this.orderForm = new FormGroup({
-      supplier: new FormControl('', [Validators.required]),
-      item:  new FormControl(),
-      quantity:  new FormControl('', [Validators.required]),
-      description:  new FormControl()
+      supplier: new FormControl(this.suppliers, Validators.required),
+      quantity: new FormControl('', Validators.required)
     });
 
     this.stocksService.getSuppliersForItem('somthing').subscribe(data => {
       this.suppliers = data;
-    })
+    });
 
     this.route.queryParams.subscribe(data => {
       if (this.router.getCurrentNavigation().extras.state) {
       this.stocks = this.router.getCurrentNavigation().extras.state.stockItem;
 
       } else {
-        console.log('No Data');
+        this.loadStocksPage();
       }
     });
   }
@@ -65,17 +54,42 @@ export class StocksContentPage implements OnInit {
   }
 
   order() {
-    this.orderForm.setValue({
-      supplier: this.suppliers,
-      item: this.stocks.itemType,
-      quantity: 0,
-      description: ''
-    });
     this.isOrder = !this.isOrder;
   }
 
   onOrder() {
-    console.log(this.orderForm.value);
+    this.submitted = true;
+
+    if (this.orderForm.invalid) {
+      this.showEmptyFieldToaster('Please fill the required fields!');
+      return;
+    }
+    this.showEmptyFieldToaster('successful!');
   }
 
+  async showEmptyFieldToaster(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      buttons: [
+        {
+          text: 'X',
+          role: 'cancel'
+        }
+      ]
+    });
+    await toast.present();
+  }
+
+  async loadStocksPage() {
+    const loading = await this.loadingCtrl.create({
+      spinner: 'circular',
+      message: 'Please wait...',
+    });
+    await loading.present();
+    setTimeout(() => {
+      this.router.navigate(['stocks']);
+      loading.dismiss();
+    }, 1000);
+  }
 }
