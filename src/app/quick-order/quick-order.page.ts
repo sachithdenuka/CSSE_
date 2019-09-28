@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SuppliersDto} from '../stocks/DTO/supplierDto';
 import {StocksService} from '../stocks/stocks-service/stocks.service';
 import {ToastController} from '@ionic/angular';
+import {count} from 'rxjs/operators';
 
 @Component({
   selector: 'app-list',
@@ -14,6 +15,7 @@ export class QuickOrderPage implements OnInit {
   public orderForm: FormGroup;
   suppliers: SuppliersDto[];
   submitted = false;
+  isStrech = true;
   constructor(
       private router: Router,
       private formBuilder: FormBuilder,
@@ -62,9 +64,12 @@ export class QuickOrderPage implements OnInit {
 
   getSuppliers() {
     if (this.orderForm.value.supplier) {
-      return this.suppliers.filter(data => {
+      let sup: SuppliersDto[];
+      sup = this.suppliers.filter(data => {
         return data.supplierId === this.orderForm.value.supplier;
       });
+      if (sup.length < 2) { this.isStrech = false; } else { this.isStrech = true; }
+      return sup;
     } else {
       return this.suppliers;
     }

@@ -7,7 +7,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form [formGroup]="orderForm" (ngSubmit)="onOrder()">
+<!--<div [ngClass]="isStrech? 'fit-content-background' : 'hundred-percent-background'">-->
+  <form class="order-form" [formGroup]="orderForm" (ngSubmit)="onOrder()">
 
     <!--supplier-->
     <ion-item>
@@ -41,25 +42,30 @@
     <div text-center *ngIf="orderForm.controls.quantity.invalid && (submitted || orderForm.controls.quantity.dirty || orderForm.controls.quantity.touched)">
       <ion-label color="danger">Please Enter Quantity</ion-label>
     </div>
-
-    <ion-button type="submit">Confirm</ion-button>
+    <div text-end>
+      <ion-button color="danger"  type="submit">Confirm</ion-button>
+    </div>
   </form>
+
   <ion-card>
     <ion-grid>
-      <ion-row>
-        <ion-title>Suppliers</ion-title>
-      </ion-row>
       <div *ngFor="let supplier of getSuppliers()">
         <ion-row>
-          <ion-col style="border: 2px solid black; border-radius: 9px; margin: 2px;" text-center>
-            <h5>{{supplier.supplierName}}</h5>
-              <ion-col *ngFor="let item of supplier.items">
-                <p>{{item.itemName}}&nbsp;&nbsp;&nbsp;<span>{{item.price}}.00</span></p>
+          <ion-col size="12" text-center>
+            <ion-card class="suppliers-card">
+              <ion-card-header class="suppliers-card-header">
+                <h5>{{supplier.supplierName}}</h5>
+              </ion-card-header>
+                <ion-col *ngFor="let item of supplier.items">
+                  <ion-card-content>
+                    <p>{{item.itemName}}&nbsp;&nbsp;&nbsp;<span>{{item.price}}.00</span></p>
+                  </ion-card-content>
               </ion-col>
+            </ion-card>
           </ion-col>
         </ion-row>
       </div>
     </ion-grid>
-
   </ion-card>
+<!--</div>-->
 </ion-content>

@@ -29,8 +29,9 @@
   background: linear-gradient(155deg, rgb(198, 198, 200) 0%, rgb(190, 185, 185) 43%, rgb(191, 191, 194) 100%);
 }
 :root {
-  --dark-color: #222;
+  --dark-color: #222;;
   --text-color: #f3f9e2;
+  --ion-color-danger: #860f0f
 }
 
 ion-menu-button{
