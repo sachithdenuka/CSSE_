@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <div [ngClass]="criticalLock? 'back100': 'back'">
+  <div [ngClass]="count? 'back100': 'back'">
     <ion-grid style="background-color: var(--dark-color)">
       <ion-row justify-content-between>
         <ion-searchbar   [(ngModel)]="searchInput"

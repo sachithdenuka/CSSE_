@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {StocksService} from '../stocks/stocks-service/stocks.service';
+import {LoginService} from '../login/login service/login.service';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +12,17 @@ export class HomePage implements OnInit{
   isLow = false;
   lowQuantity: number;
 
-  constructor(private router: Router, private stocksService: StocksService) {}
+  constructor(
+      private router: Router,
+      private stocksService: StocksService,
+      private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
+
+    if (!this.loginService.getIsLogged()) {
+      this.router.navigate(['login']);
+    }
 
     let quantity = 0;
     let items;

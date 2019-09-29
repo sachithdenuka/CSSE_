@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NavigationExtras, Router} from '@angular/router';
 import {StocksDto} from './DTO/stocksDto';
 import {StocksService} from './stocks-service/stocks.service';
+import {count} from 'rxjs/operators';
 
 @Component({
   selector: 'app-stocks',
@@ -13,12 +14,18 @@ export class StocksPage implements OnInit {
   allStocks: StocksDto[];
   criticalLock = false;
   searchInput = '';
+  count = false;
   constructor(private router: Router, private stocksService: StocksService) { }
 
   ngOnInit() {
     this.allStocks = this.filterItems();
     this.stocksService.getAllStocksForSite('SI001').subscribe( data => {
-        this.allStocks = data;
+      if (data.length < 6) {
+        this.count = true;
+      } else {
+        this.count = false;
+      }
+      this.allStocks = data;
     });
   }
 

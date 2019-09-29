@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title class="titleFont">Update Stock</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="card">
+    <ion-row justify-content-between>
+      <ion-searchbar animated></ion-searchbar>
+    </ion-row>
+
+    <ion-row justify-content-between>
+
+    </ion-row>
+      <ion-card  class="row-content" *ngFor="let updateCont of varia">
+        <p>{{ updateCont.itemType }}</p>
+      </ion-card>
+
+  </ion-grid>
+
+</ion-content>
