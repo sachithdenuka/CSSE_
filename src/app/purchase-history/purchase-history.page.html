@@ -6,3 +6,15 @@
     <ion-title>Purchase History</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+
+  <ion-card *ngFor="let history of historyItems">
+    <ion-item href="#" class="activated">
+      <ion-icon name="calendar" slot="start" color="danger"></ion-icon>
+      <ion-label>{{ history.purchaseOrder.ordId }}</ion-label>
+      <ion-label>{{ history.purchaseOrder.cost }}.00LKR</ion-label>
+    </ion-item>
+    <ion-label>Order Date : {{ history.purchaseOrder.ordDate | date: 'dd/MM/yyyy' }}</ion-label>&nbsp;&nbsp;
+    <ion-label>Delivery Date : {{ history.purchaseOrder.deliveryDate | date: 'dd/MM/yyyy' }}</ion-label>
+  </ion-card>
+</ion-content>

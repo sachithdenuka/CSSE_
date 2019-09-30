@@ -47,25 +47,22 @@
     </div>
   </form>
 
-  <ion-card>
+
     <ion-grid>
       <div *ngFor="let supplier of getSuppliers()">
         <ion-row>
-          <ion-col size="12" text-center>
-            <ion-card class="suppliers-card">
-              <ion-card-header class="suppliers-card-header">
-                <h5>{{supplier.supplierName}}</h5>
-              </ion-card-header>
-                <ion-col *ngFor="let item of supplier.items">
-                  <ion-card-content>
-                    <p>{{item.itemName}}&nbsp;&nbsp;&nbsp;<span>{{item.price}}.00</span></p>
-                  </ion-card-content>
-              </ion-col>
-            </ion-card>
+          <ion-col size="12">
+              <ion-card style="border-radius: 15px;">
+                <ion-item color="dark">
+                  <ion-icon color="danger" name="barcode" slot="start"></ion-icon>
+                  <ion-label style="font-size: 18px;" color="light">{{supplier.supplierName}}</ion-label>
+                </ion-item>
+                <ion-card-content *ngFor="let item of supplier.items">
+                  <ion-label style="font-size: 18px;" color="danger">{{item.itemName}}&nbsp;&nbsp;&nbsp;<span>{{item.price}}.00</span></ion-label>
+                </ion-card-content>
+              </ion-card>
           </ion-col>
         </ion-row>
       </div>
     </ion-grid>
-  </ion-card>
-<!--</div>-->
 </ion-content>

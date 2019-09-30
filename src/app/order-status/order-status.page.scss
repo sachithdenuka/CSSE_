@@ -1,0 +1,26 @@
+.approved{
+  color: white;
+  background-color: #0ec254;
+  border: 2px solid green;
+  border-radius: 6px;
+  padding: 3px;
+}
+.waiting-for-approval{
+   color: white;
+   background-color: #c28600;
+   border: 2px solid #f9ad00;
+   border-radius: 6px;
+   padding: 3px;
+ }
+.rejected{
+    color: white;
+    background-color: #b51731;
+    border: 2px solid #f9090f;
+    border-radius: 6px;
+    padding:3px;
+  }
+.order-card{
+  padding: 8px;
+  padding-left: 10px;
+  border-radius: 19px;
+}

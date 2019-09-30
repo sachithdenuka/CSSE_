@@ -9,8 +9,6 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class StocksService {
-    ENVIRONMENT = environment;
-    GET_ALL_STOCKS_URL = this.ENVIRONMENT.API_URL + this.ENVIRONMENT.API_ITEM + this.ENVIRONMENT.SITE_MANAGER_STOCKS;
   constructor(private _http: HttpClient) {
   }
 

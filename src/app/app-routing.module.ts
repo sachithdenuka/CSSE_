@@ -18,8 +18,10 @@ const routes: Routes = [
   { path: 'stocks', loadChildren: './stocks/stocks.module#StocksPageModule' },
   { path: 'order_status', loadChildren: './order-status/order-status.module#OrderStatusPageModule' },
   { path: 'purchase_history', loadChildren: './purchase-history/purchase-history.module#PurchaseHistoryPageModule' },
-  { path: 'stocks-content', loadChildren: './stocks/stocks-content/stocks-content.module#StocksContentPageModule' },  { path: 'update-stock', loadChildren: './update-stock/update-stock.module#UpdateStockPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
+  { path: 'stocks-content', loadChildren: './stocks/stocks-content/stocks-content.module#StocksContentPageModule' },
+  { path: 'update-stock', loadChildren: './update-stock/update-stock.module#UpdateStockPageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'order-content', loadChildren: './order-status/order-content/order-content.module#OrderContentPageModule' }
 
 ];
 

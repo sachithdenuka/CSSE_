@@ -1,4 +1,4 @@
-export class StocksDto{
+export class  StocksDto{
     private _id: string;
     private itemId: number;
     private itemPrice: number;

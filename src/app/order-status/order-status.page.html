@@ -6,3 +6,26 @@
     <ion-title>Order Status</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+<!--  <ion-card *ngFor="let order of orderList" class="order-card">-->
+<!--      <ion-card-title style="color: #1e2023">{{ order.purchaseOrder.ordId }} <span [ngClass]="statusClass(order.purchaseOrder.ordStatus)">{{ order.purchaseOrder.ordStatus }}</span></ion-card-title>-->
+<!--      <div *ngFor="let item of order.itemDetails">-->
+<!--        <ion-card-subtitle><span>{{ item.itemType }}</span></ion-card-subtitle>-->
+<!--        <ion-card-subtitle style="color: #0bb8cc">{{ order.supplierDetails.supplierName }}</ion-card-subtitle>-->
+<!--      </div>-->
+<!--  </ion-card>-->
+  <ion-card *ngFor="let order of orderList" class="order-card">
+    <ion-item color="dark">
+      <ion-icon name="analytics" slot="start" color="danger"></ion-icon>
+      <ion-label color="light">{{ order.purchaseOrder.ordId }} <span [ngClass]="statusClass(order.purchaseOrder.ordStatus)">{{ order.purchaseOrder.ordStatus }}</span></ion-label>
+<!--      <ion-button fill="outline" slot="end">Details</ion-button>-->
+    </ion-item>
+
+    <ion-card-content>
+      <div *ngFor="let item of order.itemDetails">
+        <ion-card-subtitle><span>{{ item.itemType }}</span></ion-card-subtitle>
+        <ion-card-subtitle style="color: #0bb8cc">{{ order.supplierDetails.supplierName }}</ion-card-subtitle>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
