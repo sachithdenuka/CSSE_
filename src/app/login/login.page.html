@@ -5,6 +5,40 @@
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="login()">Login</ion-button>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <ion-item>
+      <ion-label>Username</ion-label>
+      <ion-input class="form-control" type="text" formControlName="userName"  placeholder="Enter Username" required></ion-input>
+    </ion-item>
+    <div text-center *ngIf="loginForm.controls.userName.invalid && (submitted || loginForm.controls.userName.dirty || loginForm.controls.userName.touched)">
+      <ion-label color="danger">Please Enter Username</ion-label>
+    </div>
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input class="form-control" type="text" formControlName="password"  placeholder="Enter Password" required></ion-input>
+    </ion-item>
+    <div text-center *ngIf="loginForm.controls.password.invalid && (submitted || loginForm.controls.password.dirty || loginForm.controls.password.touched)">
+      <ion-label color="danger">Please Enter Password</ion-label>
+    </div>
+    <ion-list>
+      <ion-radio-group formControlName="userType">
+        <ion-list-header>
+          <ion-label>User Type</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Site Manager</ion-label>
+          <ion-radio slot="start" value="Site_Manager" checked></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Supervisor</ion-label>
+          <ion-radio slot="start" value="Supervisor"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+        <div text-center *ngIf="loginForm.controls.userType.invalid && (submitted || loginForm.controls.userType.dirty || loginForm.controls.userType.touched)">
+          <ion-label color="danger">Please Select User Type</ion-label>
+        </div>
+    </ion-list>
+    <ion-button color="danger" type="submit">LOGIN</ion-button>
+  </form>
 
 </ion-content>
