@@ -9,6 +9,11 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class StocksService {
+<<<<<<< HEAD
+=======
+    ENVIRONMENT = environment;
+    GET_ALL_STOCKS_URL = this.ENVIRONMENT.API_URL + this.ENVIRONMENT.API_ITEM + this.ENVIRONMENT.SITE_MANAGER_STOCKS;
+>>>>>>> parent of 04ee270... Supervisor Commit
   constructor(private _http: HttpClient) {
   }
 
