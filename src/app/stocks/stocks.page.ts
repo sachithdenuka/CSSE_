@@ -33,8 +33,8 @@ export class StocksPage implements OnInit {
     this.router.navigate(['home']);
   }
 
-  compareCritical(quantity: string, criticalLevel: string) {
-    if (parseInt(quantity, 10) < parseInt(criticalLevel, 10)) {
+  compareCritical(critical) {
+    if (critical) {
       return true;
     }
     return false;

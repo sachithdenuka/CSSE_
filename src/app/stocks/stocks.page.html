@@ -18,26 +18,26 @@
       </ion-row>
       <div *ngFor="let stocks of allStocks">
         <ion-row justify-content-center *ngIf="!criticalLock">
-          <ion-card (click)="onClickItem(stocks)" [ngStyle]="{'border-color' :  stocks.isCritical? 'red': '#11C0FF'}">
+          <ion-card (click)="onClickItem(stocks)" [ngStyle]="{'border-color' :  stocks.critical? 'red': '#11C0FF'}">
             <ion-item>
-              <ion-icon name="information-circle"[color]="compareCritical(stocks.itemQuantity, stocks.criticalLevel)? 'danger': 'primary'" slot="start"></ion-icon>
+              <ion-icon name="information-circle"[color]="compareCritical(stocks.critical)? 'danger': 'primary'" slot="start"></ion-icon>
               <ion-label>
                 {{stocks.itemType}}&nbsp;&nbsp;
                 <span>
-                  <ion-badge color="danger" *ngIf="compareCritical(stocks.itemQuantity, stocks.criticalLevel)">CRITICAL</ion-badge>
+                  <ion-badge color="danger" *ngIf="compareCritical(stocks.critical)">CRITICAL</ion-badge>
                 </span>
               </ion-label>
             </ion-item>
           </ion-card>
         </ion-row>
         <ion-row justify-content-center *ngIf="criticalLock">
-          <ion-card (click)="onClickItem(stocks)" [ngStyle]="{'border-color' :  stocks.isCritical? 'red': '#11C0FF'}" *ngIf="stocks.isCritical">
+          <ion-card (click)="onClickItem(stocks)" [ngStyle]="{'border-color' :  stocks.critical? 'red': '#11C0FF'}" *ngIf="stocks.critical">
             <ion-item>
-              <ion-icon name="information-circle"[color]="compareCritical(stocks.itemQuantity, stocks.criticalLevel)? 'danger': 'primary'" slot="start"></ion-icon>
+              <ion-icon name="information-circle"[color]="compareCritical(stocks.critical)? 'danger': 'primary'" slot="start"></ion-icon>
               <ion-label>
                 {{stocks.itemType}}&nbsp;&nbsp;
                 <span>
-                  <ion-badge color="danger" *ngIf="compareCritical(stocks.itemQuantity, stocks.criticalLevel)">CRITICAL</ion-badge>
+                  <ion-badge color="danger" *ngIf="compareCritical(stocks.critical)">CRITICAL</ion-badge>
                 </span>
               </ion-label>
             </ion-item>

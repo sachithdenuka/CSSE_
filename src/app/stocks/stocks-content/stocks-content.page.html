@@ -10,16 +10,16 @@
 <ion-content>
     <ion-card *ngIf="stocks">
       <ion-item>
-        <ion-icon name="information-circle" slot="start" [color]="stocks.isCritical? 'danger':'primary'"></ion-icon>
-        <ion-label *ngIf="stocks.isCritical">Details&nbsp;&nbsp;<ion-badge color="danger">CRITICAL</ion-badge></ion-label>
-        <ion-label *ngIf="!stocks.isCritical">Details&nbsp;&nbsp;<ion-badge color="primary">NOT CRITICAL</ion-badge></ion-label>
+        <ion-icon name="information-circle" slot="start" [color]="stocks.critical? 'danger':'primary'"></ion-icon>
+        <ion-label *ngIf="stocks.critical">Details&nbsp;&nbsp;<ion-badge color="danger">CRITICAL</ion-badge></ion-label>
+        <ion-label *ngIf="!stocks.critical">Details&nbsp;&nbsp;<ion-badge color="primary">NOT CRITICAL</ion-badge></ion-label>
         <ion-button fill="outline" slot="end" (click)="order()">Order</ion-button>
       </ion-item>
       <ion-card-content>
         <p>1 {{stocks.itemMetric}} of {{stocks.itemType}} : {{stocks.itemPrice}}</p>
         <h3><ion-badge color="primary">{{stocks.itemQuantity}} <small>{{stocks.itemMetric}}</small> Available.</ion-badge></h3>
         <!--<h3><ion-badge color="warning">CRITICAL LEVEL : {{stocks.criticalLevel}} <small>{{stocks.itemMetric}}</small></ion-badge></h3>-->
-        <ion-progress-bar [buffer]="calculateRemaining(stocks.itemQuantity, stocks.criticalLevel)" [color]="stocks.isCritical? 'danger': 'warning'" [value]="calculateRemaining(stocks.itemQuantity, stocks.criticalLevel)"></ion-progress-bar>
+<!--        <ion-progress-bar [buffer]="calculateRemaining(stocks.itemQuantity, stocks.criticalLevel)" [color]="stocks.critical? 'danger': 'warning'" [value]="calculateRemaining(stocks.itemQuantity, stocks.criticalLevel)"></ion-progress-bar>-->
       </ion-card-content>
     </ion-card>
     <ion-card *ngIf="isOrder">

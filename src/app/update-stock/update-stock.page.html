@@ -5,17 +5,43 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="card">
-    <ion-row justify-content-between>
-      <ion-searchbar animated></ion-searchbar>
-    </ion-row>
+  <ion-grid class="">
+<!--    <ion-row justify-content-between>-->
+<!--      <ion-searchbar animated></ion-searchbar>-->
+<!--    </ion-row>-->
 
-    <ion-row justify-content-between>
-
-    </ion-row>
-      <ion-card  class="row-content" *ngFor="let updateCont of varia">
-        <p>{{ updateCont.itemType }}</p>
+    <div *ngFor="let updateCont of varia; let i = index">
+      <ion-card>
+        <ion-item>
+          <ion-icon name="create" color="warning" slot="start" (click)="showEditField(updateCont.itemQuantity, i)"></ion-icon>
+          <h3>{{ updateCont.itemType }} ({{updateCont.itemQuantity}})
+            <form [formGroup]="updateForm">
+              <ion-item>
+                <ion-input placeholder="enter quantity" formControlName="quantity" id="quantityToUpdate" type="number" [disabled]="updateCont.editable"></ion-input>
+              </ion-item>
+            </form>
+          </h3>
+          <ion-button fill="outline" slot="end" (click)="updateQuantity(i)">Update</ion-button>
+        </ion-item>
       </ion-card>
+<!--      <ion-row>-->
+<!--        <ion-col size="4">{{ updateCont.itemType }}</ion-col>-->
+<!--        <div *ngIf="!updateCont.editable">-->
+<!--          <ion-col size="2">-->
+<!--            <ion-badge color="warning" (click)="showEditField(updateCont.itemQuantity, i)">{{ updateCont.itemQuantity }}</ion-badge>-->
+<!--            <ion-button color="danger">Update</ion-button>-->
+<!--          </ion-col>-->
+<!--        </div>-->
+<!--        <ion-col size="6" *ngIf="updateCont.editable">-->
+<!--          <ion-item *ngIf="updateCont.editable">-->
+<!--            <ion-input type="number" [(ngModel)]="valueToEdit"></ion-input>-->
+<!--          </ion-item>-->
+<!--          <ion-button (click)="updateQuantity(i)">UPDATE<ion-icon color="light" name="arrow-dropdown"></ion-icon></ion-button></ion-col>-->
+<!--      </ion-row>-->
+    </div>
+<!--      <ion-card  class="row-content" *ngFor="let updateCont of varia">-->
+<!--        <h2>{{ updateCont.itemType }} <ion-badge color="warning">{{ updateCont.itemQuantity }}</ion-badge> <ion-icon color="primary" name="arrow-dropdown"></ion-icon></h2>-->
+<!--      </ion-card>-->
 
   </ion-grid>
 

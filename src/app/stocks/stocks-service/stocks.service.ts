@@ -13,7 +13,7 @@ export class StocksService {
   }
 
   getAllStocksForSite(siteId: string) {
-    return this._http.get('http://localhost:9200/api/item/get-all-items-for-site-manager').pipe(
+    return this._http.get('https://csse-we-29-spring.herokuapp.com/api/item/get-all-items-for-site-manager').pipe(
         map((data: any[]) => data.map((item: any) => {
           const model = new StocksDto();
           Object.assign(model, item);

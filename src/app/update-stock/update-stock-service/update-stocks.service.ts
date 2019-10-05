@@ -14,9 +14,14 @@ export class UpdateStocksService {
     return this.updateStockHTTP.get('http://localhost:9200/api/item/get-all-items').pipe(
         map((data: any[]) => data.map((item: any) => {
           const model = new UpdateStocksDto();
+          model.setEditable(false);
           Object.assign(model, item);
           return model;
         }))
     );
+  }
+
+  updateItmeQuantity(itemToUpdate) {
+      return this.updateStockHTTP.post('http://localhost:9200/api/item/upadate-item-quantity', itemToUpdate);
   }
 }

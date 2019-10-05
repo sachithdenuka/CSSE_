@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SuppliersDto} from '../DTO/supplierDto';
 import {StocksService} from '../stocks-service/stocks.service';
 import {LoadingController, ToastController} from '@ionic/angular';
+import {OrderService} from '../../order-status/order-status-services/order.service';
 
 @Component({
   selector: 'app-stocks-content',
@@ -22,6 +23,7 @@ export class StocksContentPage implements OnInit {
       private route: ActivatedRoute,
       private toastController: ToastController,
       public loadingCtrl: LoadingController,
+      private orderService: OrderService,
       private formBuilder: FormBuilder,
       private stocksService: StocksService) { }
 
@@ -64,6 +66,32 @@ export class StocksContentPage implements OnInit {
       this.showEmptyFieldToaster('Please fill the required fields!');
       return;
     }
+
+    const order = {
+      ordType: 'Construction',
+      ordStatus: 'Pending',
+      companyName: this.orderForm.controls.supplier.value,
+      deliveryAddress: this.orderForm.controls.supplier.value + ', road, Colombo',
+      ordDate: new Date(),
+      deliveryDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+      itemIdList: [
+        {
+          itemId: this.stocks.itemId,
+          itemQuantity: this.orderForm.controls.quantity.value
+        }
+      ],
+      cost: parseFloat(this.stocks.itemPrice) * parseInt(this.orderForm.controls.quantity.value, 10),
+      supplierId: this.stocks.supplierId
+    };
+    this.orderService.insertOrder(order).subscribe(data => {
+      if (data === true ) {
+        console.log(data);
+        this.router.navigate(['stocks']);
+      } else {
+        this.showEmptyFieldToaster('Please Try again!');
+      }
+    })
+
     this.showEmptyFieldToaster('successful!');
   }
 

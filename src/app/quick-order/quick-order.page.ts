@@ -5,6 +5,8 @@ import {SuppliersDto} from '../stocks/DTO/supplierDto';
 import {StocksService} from '../stocks/stocks-service/stocks.service';
 import {ToastController} from '@ionic/angular';
 import {count} from 'rxjs/operators';
+import {OrderService} from '../order-status/order-status-services/order.service';
+import {OrderDto} from './order-dto/orderDto';
 
 @Component({
   selector: 'app-list',
@@ -16,11 +18,13 @@ export class QuickOrderPage implements OnInit {
   suppliers: SuppliersDto[];
   submitted = false;
   isStrech = true;
+  orderDet: OrderDto;
   constructor(
       private router: Router,
       private formBuilder: FormBuilder,
       private stocksService: StocksService,
       private toastController: ToastController,
+      private orderService: OrderService
   ) { }
 
   ngOnInit() {
@@ -45,6 +49,10 @@ export class QuickOrderPage implements OnInit {
       this.showEmptyFieldToaster('Please fill the required fields!');
       return;
     }
+
+    this.orderService.insertOrder(this.orderDet).subscribe(data => {
+      console.log(data);
+    });
     this.showEmptyFieldToaster('successful!');
   }
 

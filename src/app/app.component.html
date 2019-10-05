@@ -3,7 +3,7 @@
     <ion-menu type="overlay">
       <ion-content class="side-nav-menu">
         <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of getListToLoggedUser()">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label class="menu-text">
@@ -11,6 +11,7 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+            <ion-button (click)="logOut()" color="danger">Logout</ion-button>
         </ion-list>
       </ion-content>
     </ion-menu>

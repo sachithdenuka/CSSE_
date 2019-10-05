@@ -8,7 +8,7 @@ import {LoginDto} from '../LoginDto/LoginDto';
 export class LoginService {
 
   isLogged;
-
+  isManager = false;
   constructor(private _http: HttpClient) {
     this.isLogged = false;
   }
@@ -24,6 +24,15 @@ export class LoginService {
   login(loginDetails: LoginDto) {
     this.isLogged = true;
     console.log(loginDetails);
-    return this._http.post('http://localhost:9200/api/login/verify-user', loginDetails);
+    if (loginDetails.userType === 'Site_Manager') { this.setIsManager(true); } else { this.setIsManager(false) }
+    return this._http.post('https://csse-we-29-spring.herokuapp.com/api/login/verify-user', loginDetails);
+  }
+
+  setIsManager(isManager: boolean) {
+    this.isManager = isManager;
+  }
+
+  getIsManager() {
+    return this.isManager;
   }
 }

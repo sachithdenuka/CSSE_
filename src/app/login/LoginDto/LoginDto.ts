@@ -1,7 +1,7 @@
 export class LoginDto {
-    private username: string;
-    private password: string;
-    private userType: string;
+    public username: string;
+    public password: string;
+    public userType: string;
 
     constructor(userName: string, password: string, userType: string) {
         this.username = userName;

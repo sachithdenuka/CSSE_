@@ -28,8 +28,9 @@ export class HomePage implements OnInit{
     let items;
     this.stocksService.getAllStocksForSite('something').subscribe(data => {
       items = data;
+      console.log(data);
       for (let i = 0; i < items.length; i++) {
-        if (items[i].isCritical) {
+        if (items[i].critical) {
           quantity += 1;
         }
       }
